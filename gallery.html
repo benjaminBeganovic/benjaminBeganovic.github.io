@@ -1,0 +1,68 @@
+﻿<!doctype html>
+<html>
+   <head>
+      <title>Gallery</title>
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+      <script src="https://unpkg.com/dropbox/dist/Dropbox-sdk.min.js"></script>
+      <script src="assets/js/utils.js"></script>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+      <link rel="stylesheet" href="assets/css/style.css">
+      <script src="controllers/GalleryCtrl.js"></script>
+   </head>
+   <body>
+      <div ng-app="PhotoGallery" ng-controller="GalleryCtrl">
+         <div class="backgroundG">
+            <a id="userProfile" href="" class="userName">
+               <h3 class="userNameFont" id="userName">User</h3>
+            </a>
+            <h3 class="gTtitleClass" id="galleryTitle">Loading...</h3>
+            <div id="photoView" class="centerDiv well photoViewClass viewColumnWidth">
+               <div class="fixedImg">
+                  <img id="imageId" class="img-responsive" src="" alt="loading...">
+               </div>
+               <h4 id="picTitle" class="picTitleClass">loading...</h4>
+               <button id="prevBtn" ng-click="previousPic()" class="btn btn-warning"><<</button>
+               <button id="nextBtn" class="pull-right btn btn-warning" ng-click="nextPic()">>></button>    
+            </div>
+            <div id="uploadView" class="centerDiv well viewColumnWidth hiddenD">
+               <h3 align="center">Upload photos</h3>
+               <form>
+                  <div class="fileUpload btn btn-warning">
+                     <span>&nbsp Browse &nbsp</span>
+                     <input id="photosForUpload" type="file" accept="image/*" class="upload" multiple ng-click="clearUploaded()" ng-model="image" onchange="angular.element(this).scope().showSelectedFiles()" />
+                  </div>
+                  <input id="uploadFile" placeholder="Nothing selected" disabled="disabled" class="selectedFWidth"/><br>
+                  <div class="input-group">
+                     <span class="input-group-btn">
+                     <button class="btn btn-warning uplaodButton" ng-click="uploadFiles()">Upload</button>
+                     </span>
+                     <h4 class="uploadStatus" id="percentage"></h4>
+                  </div>
+               </form>
+            </div>
+            <div id="listPhoto" class="centerDiv well viewColumnWidth hiddenD">
+               <h3> List of photos
+                  <span class="savetoJsonBtn">
+                  <button class="btn btn-warning" ng-click="downloadJsonList()">Save a list to Json file</button>
+                  </span>
+               </h3>
+               <hr>
+               <div class="panel-group">
+                  <div ng-repeat="t in listOfTitles track by $index">
+                     <div class="panel panel-default" ng-attr-id="{{t}}" style="margin-bottom: 10px;">
+                        <div class="panel-heading">
+                           <button class="btn btn-warning removeBtn" ng-click="deleteFile(t)">Remove</button>
+                           {{t}}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="footerGallery">
+               <p class="displayInline">Copyright © 2017 Benjamin Beganović &nbsp &nbsp</p>
+               <a href="https://github.com/benjaminBeganovic/benjaminBeganovic.github.io">Check this out on GitHub</a>
+            </div>
+         </div>
+      </div>
+   </body>
+</html>
